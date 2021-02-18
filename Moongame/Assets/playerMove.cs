@@ -5,12 +5,14 @@ using UnityEngine;
 public class playerMove : MonoBehaviour
 {
     public float speed = 5f;
-    public float jumpForce = 100f;
+    public float jumpForce = 5f;
     private Rigidbody2D rb;
 
     private float vertical;
     private float horizontal;
     private Vector3 pos;
+
+    private bool jump = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,22 +26,23 @@ public class playerMove : MonoBehaviour
     {
         pos = transform.position;
         horizontal = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(Vector2.up * jumpForce * Time.deltaTime);
-            Debug.Log(rb.velocity);
+            jump = true;
         }
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, pos.y);
+        if (jump)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+            Debug.Log(rb.velocity);
+            jump = false;
+        }
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
-    private void jump()
-    {
-
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
