@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerMove : MonoBehaviour
 {
     public float speed = 5f;
-    public float jumpForce = 300f;
+    public float jumpForce = 100f;
     private Rigidbody2D rb;
 
     private float vertical;
@@ -26,7 +26,7 @@ public class playerMove : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = Vector2.up * jumpForce;
+            rb.AddForce(Vector2.up * jumpForce * Time.deltaTime);
             Debug.Log(rb.velocity);
         }
     }
