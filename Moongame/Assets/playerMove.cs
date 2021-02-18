@@ -5,8 +5,13 @@ using UnityEngine;
 public class playerMove : MonoBehaviour
 {
     public float speed = 5f;
+    public float jumpForce = 300f;
     private Rigidbody2D rb;
+
     private float vertical;
+    private float horizontal;
+    private Vector3 pos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,11 +22,27 @@ public class playerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vertical = Input.GetAxis("Vertical");
+        pos = transform.position;
+        horizontal = Input.GetAxis("Horizontal");
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.velocity = Vector2.up * jumpForce;
+            Debug.Log(rb.velocity);
+        }
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = ;
+        rb.velocity = new Vector2(horizontal * speed, pos.y);
+    }
+
+    private void jump()
+    {
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 }
