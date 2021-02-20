@@ -4,29 +4,33 @@ using UnityEngine;
 
 public class playerMove : MonoBehaviour
 {
+    [Header("Movement and Jump")]
     public float speed = 5f;
     public float jumpForce = 5f;
-    private Rigidbody2D rb;
 
-    private float vertical;
+    [Header("Components")]
+    private Rigidbody2D rb;
+    private BoxCollider2D boxCollider2d;
+    public LayerMask groundLayer;
+
     private float horizontal;
-    private Vector3 pos;
 
     private bool jump = false;
+    private bool onGround = false;
+    public float groundDist = 0.6f;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        pos = transform.position;
+        onGround = Physics2D.Raycast(transform.position, Vector2.down, groundDist, groundLayer);
         horizontal = Input.GetAxis("Horizontal");
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && onGround)
         {
             jump = true;
         }
@@ -43,9 +47,7 @@ public class playerMove : MonoBehaviour
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
+    
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
+
 }
