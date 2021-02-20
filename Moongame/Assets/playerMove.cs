@@ -11,13 +11,15 @@ public class playerMove : MonoBehaviour
     [Header("Components")]
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider2d;
+
+    [Header("Ground Detection")]
     public LayerMask groundLayer;
+    public float groundDist = 0.6f;
 
     private float horizontal;
 
     private bool jump = false;
     private bool onGround = false;
-    public float groundDist = 0.6f;
 
     // Start is called before the first frame update
     void Start()
