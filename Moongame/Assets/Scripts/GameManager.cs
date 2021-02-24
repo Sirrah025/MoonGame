@@ -8,12 +8,21 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [Header("UI Stuff")]
+    [Header("General stuff")]
     public GameObject canvas;
     public GameObject events;
+
+    [Header("Buttons")]
     public GameObject startButton;
+    public GameObject attrButton;
+    public GameObject howButton;
+    public GameObject backButton;
+
+    [Header("UI stuff")]
     public GameObject backgroundImage;
     public GameObject titleText;
+    public GameObject attributions;
+    public GameObject how;
 
     private void Awake()
     {
@@ -30,7 +39,38 @@ public class GameManager : MonoBehaviour
     {
         startButton.SetActive(false);
         titleText.SetActive(false);
+        attrButton.SetActive(false);
+        howButton.SetActive(false);
         StartCoroutine(LoadYourAsyncScene("MainGame"));
+    }
+
+    public void howToPlay()
+    {
+        startButton.SetActive(false);
+        titleText.SetActive(false);
+        howButton.SetActive(false);
+        attrButton.SetActive(false);
+        how.SetActive(true);
+
+    }
+
+    public void attribute()
+    {
+        startButton.SetActive(false);
+        titleText.SetActive(false);
+        howButton.SetActive(false);
+        attrButton.SetActive(false);
+        attributions.SetActive(true);
+    }
+
+    public void back()
+    {
+        startButton.SetActive(true);
+        titleText.SetActive(true);
+        howButton.SetActive(true);
+        attrButton.SetActive(true);
+        attributions.SetActive(false);
+        how.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
