@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,9 +21,12 @@ public class GameManager : MonoBehaviour
 
     [Header("UI stuff")]
     public GameObject backgroundImage;
-    public GameObject titleText;
-    public GameObject attributions;
-    public GameObject how;
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI attributions;
+    public TextMeshProUGUI how;
+    public TextMeshProUGUI score;
+
+    private float scoreNum;
 
     private void Awake()
     {
@@ -38,45 +42,56 @@ public class GameManager : MonoBehaviour
     public void startGame()
     {
         startButton.SetActive(false);
-        titleText.SetActive(false);
+        titleText.gameObject.SetActive(false);
         attrButton.SetActive(false);
         howButton.SetActive(false);
         backButton.SetActive(false);
+        score.gameObject.SetActive(true);
         StartCoroutine(LoadYourAsyncScene("MainGame"));
     }
 
     public void howToPlay()
     {
         startButton.SetActive(false);
-        titleText.SetActive(false);
+        titleText.gameObject.SetActive(false);
         howButton.SetActive(false);
         attrButton.SetActive(false);
-        how.SetActive(true);
+        how.gameObject.SetActive(true);
 
     }
 
     public void attribute()
     {
         startButton.SetActive(false);
-        titleText.SetActive(false);
+        titleText.gameObject.SetActive(false);
         howButton.SetActive(false);
         attrButton.SetActive(false);
-        attributions.SetActive(true);
+        attributions.gameObject.SetActive(true);
     }
 
     public void back()
     {
         startButton.SetActive(true);
-        titleText.SetActive(true);
+        titleText.gameObject.SetActive(true);
         howButton.SetActive(true);
         attrButton.SetActive(true);
-        attributions.SetActive(false);
-        how.SetActive(false);
+        attributions.gameObject.SetActive(false);
+        how.gameObject.SetActive(false);
     }
+
+    public void increaseScore(Vector2 pos)
+    {
+        if (scoreNum < pos.y)
+        {
+            scoreNum = pos.y;
+            score.text = "Score: " + scoreNum;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        scoreNum = 0;
     }
 
     // Update is called once per frame
