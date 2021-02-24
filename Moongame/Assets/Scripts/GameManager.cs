@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         titleText.SetActive(false);
         attrButton.SetActive(false);
         howButton.SetActive(false);
+        backButton.SetActive(false);
         StartCoroutine(LoadYourAsyncScene("MainGame"));
     }
 

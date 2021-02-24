@@ -232,7 +232,7 @@ MonoBehaviour:
   startButton: {fileID: 1004246474}
   attrButton: {fileID: 796602071}
   howButton: {fileID: 1850923195}
-  backButton: {fileID: 0}
+  backButton: {fileID: 582675161}
   backgroundImage: {fileID: 249437544}
   titleText: {fileID: 1268403924}
   attributions: {fileID: 1430043436}
@@ -333,7 +333,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 582675164}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 361951188}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: back
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &582675164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,7 +600,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 796602074}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 361951188}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: attribute
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &796602074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,7 +1041,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Title
+  m_text: Moonwalk
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
