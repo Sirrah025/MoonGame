@@ -4,31 +4,33 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    public Transform background;
-    private Transform cam;
-    public float parallaxScale = 1f;
-    public float smoothing = 1f;
+    private float lengthX, lengthY;
+    private Vector2 startPos;
+    public GameObject cam;
+    public float parallax;
 
-    private Vector2 previousCamPos;
-
-
-    private void Awake()
-    {
-        
-    }
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main.transform;
-        previousCamPos = cam.position;
+        startPos = transform.position;
+        lengthX = GetComponent<SpriteRenderer>().bounds.size.x;
+        lengthY = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 parallax = new Vector2 ((previousCamPos.x - cam.position.x) * parallaxScale, (previousCamPos.y - cam.position.y) * parallaxScale);
-        Vector2 backgroundTargetPos = new Vector2 (background.position.x + parallax.x, background.position.y + parallax.y);
-        background.position = Vector2.Lerp(background.position, backgroundTargetPos, smoothing * Time.deltaTime);
-        previousCamPos = cam.position;
+        float temp = (cam.transform.position.x * (1 - parallax));
+        float tempY = (cam.transform.position.y * (1 - parallax));
+        float distX = (cam.transform.position.x * parallax);
+        float distY = (cam.transform.position.y * parallax);
+
+        transform.position = new Vector3(startPos.x + distX, startPos.y + distY, transform.position.z);
+
+        if (temp > startPos.x + lengthX) startPos.x += lengthX;
+        else if (temp < startPos.x - lengthX) startPos.x -= lengthX;
+
+        if (tempY > startPos.y + lengthY) startPos.y += lengthY;
+        else if (temp < startPos.y - lengthY) startPos.y -= lengthY;
     }
 }

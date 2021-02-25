@@ -8,6 +8,8 @@ public class playerMove : MonoBehaviour
     public float speed = 6f;
     private float jumpForce = 7f;
     public GameObject jumpPS;
+    public GameObject walkPS;
+    public GameObject oWalkPS;
 
     [Header("Components")]
     private Rigidbody2D rb;
@@ -39,7 +41,8 @@ public class playerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pos = transform.position;
+        walkPS.transform.position = transform.position;
+        oWalkPS.transform.position = transform.position;
         onGround = Physics2D.Raycast(transform.position, Vector2.down, groundDist, groundLayer);
         horizontal = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump") && onGround)
@@ -60,20 +63,17 @@ public class playerMove : MonoBehaviour
         }
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         GameManager.Instance.increaseScore(transform.position);
-        if (onGround)
+        if (onGround && horizontal != 0)
         {
-            if(horizontal != 0)
+            switch(horizontal > 0)
             {
-                ps.Play();
+                case true:
+                    Instantiate(walkPS);
+                    break;
+                case false:
+                    Instantiate(oWalkPS);
+                    break;
             }
-            else
-            {
-                ps.Stop();
-            }
-        }
-        else
-        {
-            ps.Stop();
         }
     }
 
