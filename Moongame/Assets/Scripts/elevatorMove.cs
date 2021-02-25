@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class platformMove : MonoBehaviour
+public class elevatorMove : MonoBehaviour
 {
 
-    float dirX, moveSpeed = 3f;
+    float diry, moveSpeed = 2f;
     private bool moving = true;
 
     // Start is called before the first frame update
@@ -18,9 +18,9 @@ public class platformMove : MonoBehaviour
     void Update()
     {
         if (moving)
-            transform.position = new Vector2(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y);
+            transform.position = new Vector2(transform.position.x, transform.position.y + moveSpeed * Time.deltaTime);
         else
-            transform.position = new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
+            transform.position = new Vector2(transform.position.x, transform.position.y - moveSpeed * Time.deltaTime);
     }
 
     public IEnumerator platWait()

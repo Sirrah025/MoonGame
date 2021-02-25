@@ -5,8 +5,8 @@ using UnityEngine;
 public class playerMove : MonoBehaviour
 {
     [Header("Movement and Jump")]
-    public float speed = 5f;
-    public float jumpForce = 5f;
+    public float speed = 6f;
+    private float jumpForce = 7f;
 
     [Header("Components")]
     private Rigidbody2D rb;
@@ -50,7 +50,17 @@ public class playerMove : MonoBehaviour
         GameManager.Instance.increaseScore(transform.position);
     }
 
-    
+    void OnCollisionEnter2D(Collision2D plat)
+    {
+        if (plat.gameObject.name.Equals("Alien Ship Platform"))
+            this.transform.parent = plat.transform;
+    }
+
+    void OnCollisionExit2D(Collision2D plat)
+    {
+        if (plat.gameObject.name.Equals("Alien Ship Platform"))
+            this.transform.parent = null;
+    }
 
 
 }
