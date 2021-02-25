@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  jumpPS: {fileID: 7963131031301016675, guid: 3de85bffa17acbb44844b459ba6c4f07, type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 512

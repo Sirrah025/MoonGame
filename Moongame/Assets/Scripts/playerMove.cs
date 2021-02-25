@@ -7,6 +7,7 @@ public class playerMove : MonoBehaviour
     [Header("Movement and Jump")]
     public float speed = 6f;
     private float jumpForce = 7f;
+    public GameObject jumpPS;
 
     [Header("Components")]
     private Rigidbody2D rb;
@@ -36,17 +37,20 @@ public class playerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        pos = transform.position;
         onGround = Physics2D.Raycast(transform.position, Vector2.down, groundDist, groundLayer);
         horizontal = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump") && onGround)
         {
+            pos = transform.position;
             jump = true;
+            Instantiate(jumpPS);
+            jumpPS.transform.position = new Vector2(rb.velocity.x, pos.y - 0.5f);
         }
     }
 
     private void FixedUpdate()
     {
-        pos = transform.position;
         if (jump)
         {
             rb.velocity = Vector2.up * jumpForce;
@@ -55,15 +59,16 @@ public class playerMove : MonoBehaviour
         }
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         GameManager.Instance.increaseScore(transform.position);
-        if (pos != transform.position)
+        if (pos != transform.position && onGround)
         {
-            if(horizontal >= 0)
+            switch (horizontal >= 0)
             {
-                psRot.y = -99;
-            }
-            else if(horizontal <= 0)
-            {
-                psRot.y = 99;
+                case true:
+                    psRot.y = -99;
+                    break;
+                case false:
+                    psRot.y = 99;
+                    break;
             }
             ps.Play();
         }

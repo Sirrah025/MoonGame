@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         if (scoreNum < pos.y)
         {
             scoreNum = pos.y;
-            score.text = "Score: " + scoreNum;
+            score.text = "Score: " + System.Math.Round((decimal)scoreNum, 3);
         }
     }
 
