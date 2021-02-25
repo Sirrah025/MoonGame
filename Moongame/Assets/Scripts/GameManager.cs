@@ -95,8 +95,8 @@ public class GameManager : MonoBehaviour
     //can load previous or next level
     public void LoadNextLevel(int x)
     {
-        StartCoroutine(LoadYourAsyncScene(levelList[x]));
-        //SceneManager.LoadScene(x);
+        //StartCoroutine(LoadYourAsyncScene(levelList[x]));
+        SceneManager.LoadScene(x);
     }
 
     public void GameOver()
