@@ -21,10 +21,14 @@ public class GameManager : MonoBehaviour
 
     [Header("UI stuff")]
     public GameObject backgroundImage;
+    public TextMeshProUGUI startButtonText;
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI attributions;
     public TextMeshProUGUI how;
     public TextMeshProUGUI score;
+
+    [Header("Hackey code stuff")]
+    public string[] levelList;
 
     private float scoreNum;
 
@@ -88,9 +92,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //can load previous or next level
     public void LoadNextLevel(int x)
     {
-        SceneManager.LoadScene(x);
+        StartCoroutine(LoadYourAsyncScene(levelList[x]));
+        //SceneManager.LoadScene(x);
+    }
+
+    public void GameOver()
+    {
+        StopAllCoroutines();
+        startButton.SetActive(true);
+        score.gameObject.SetActive(false);
+        startButtonText.SetText("Try again?");
     }
 
     // Start is called before the first frame update

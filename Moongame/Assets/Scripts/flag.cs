@@ -10,7 +10,8 @@ public class flag : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.name.Equals("Player"))
-            gm.LoadNextLevel(nextLevel);
+            GameManager.Instance.LoadNextLevel(nextLevel);
+            //gm.LoadNextLevel(nextLevel);
     }
 
 
