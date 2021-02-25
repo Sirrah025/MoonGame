@@ -88,6 +88,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LoadNextLevel(int x)
+    {
+        SceneManager.LoadScene(x);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
