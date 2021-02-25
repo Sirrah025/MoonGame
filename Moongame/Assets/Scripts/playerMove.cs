@@ -17,6 +17,9 @@ public class playerMove : MonoBehaviour
     public float groundDist = 0.6f;
 
     private float horizontal;
+    private Vector3 pos;
+
+    public GameObject ps;
 
     private bool jump = false;
     private bool onGround = false;
@@ -40,6 +43,7 @@ public class playerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        pos = transform.position;
         if (jump)
         {
             rb.velocity = Vector2.up * jumpForce;
@@ -48,6 +52,8 @@ public class playerMove : MonoBehaviour
         }
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         GameManager.Instance.increaseScore(transform.position);
+        if (pos != transform.position)
+            Instantiate(ps);
     }
 
     void OnCollisionEnter2D(Collision2D plat)
