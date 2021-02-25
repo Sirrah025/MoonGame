@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public string[] levelList;
 
     private float scoreNum;
+    private float scoreMem;
 
     private void Awake()
     {
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
         backButton.SetActive(false);
         score.gameObject.SetActive(true);
         StartCoroutine(LoadYourAsyncScene("MainGame"));
+        scoreMem = 0;
+        scoreNum = 0;
     }
 
     public void howToPlay()
@@ -85,11 +88,12 @@ public class GameManager : MonoBehaviour
 
     public void increaseScore(Vector2 pos)
     {
-        if (scoreNum < pos.y)
+        if (scoreMem < pos.y)
         {
-            scoreNum = pos.y;
-            score.text = "Score: " + System.Math.Round((decimal)scoreNum, 3);
+            scoreMem = pos.y;
         }
+        scoreNum += scoreMem;
+        score.text = "Score: " + System.Math.Round((decimal)scoreNum, 3);
     }
 
     //can load previous or next level

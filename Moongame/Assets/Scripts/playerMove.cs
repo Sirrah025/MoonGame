@@ -42,10 +42,9 @@ public class playerMove : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump") && onGround)
         {
-            pos = transform.position;
             jump = true;
             Instantiate(jumpPS);
-            jumpPS.transform.position = new Vector2(rb.velocity.x, pos.y - 0.5f);
+            jumpPS.transform.position = new Vector2(pos.x, pos.y - 0.5f);
         }
     }
 
