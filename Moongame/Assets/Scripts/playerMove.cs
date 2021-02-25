@@ -22,6 +22,7 @@ public class playerMove : MonoBehaviour
 
     private ParticleSystem ps;
     private Vector3 psRot;
+    private Vector3 psPos;
 
     private bool jump = false;
     private bool onGround = false;
@@ -32,6 +33,7 @@ public class playerMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ps = GetComponent<ParticleSystem>();
         psRot = ps.shape.rotation;
+        psPos = jumpPS.transform.position;
     }
 
     // Update is called once per frame
@@ -43,8 +45,8 @@ public class playerMove : MonoBehaviour
         if (Input.GetButtonDown("Jump") && onGround)
         {
             jump = true;
+            jumpPS.transform.position = transform.position;
             Instantiate(jumpPS);
-            jumpPS.transform.position = new Vector2(pos.x, pos.y - 0.5f);
         }
     }
 
@@ -53,27 +55,25 @@ public class playerMove : MonoBehaviour
         if (jump)
         {
             rb.velocity = Vector2.up * jumpForce;
-            Debug.Log(rb.velocity);
+            //Debug.Log(rb.velocity);
             jump = false;
         }
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         GameManager.Instance.increaseScore(transform.position);
-        if (pos != transform.position && onGround)
+        if (onGround)
         {
-            switch (horizontal >= 0)
+            if(horizontal != 0)
             {
-                case true:
-                    psRot.y = -99;
-                    break;
-                case false:
-                    psRot.y = 99;
-                    break;
+                ps.Play();
             }
-            ps.Play();
+            else
+            {
+                ps.Stop();
+            }
         }
         else
         {
-            ps.Pause();
+            ps.Stop();
         }
     }
 
