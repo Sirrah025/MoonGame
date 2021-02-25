@@ -17,6 +17,10 @@ public class playerMove : MonoBehaviour
     public float groundDist = 0.6f;
 
     private float horizontal;
+    private Vector3 pos;
+
+    private ParticleSystem ps;
+    private Vector3 psRot;
 
     private bool jump = false;
     private bool onGround = false;
@@ -25,6 +29,8 @@ public class playerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        ps = GetComponent<ParticleSystem>();
+        psRot = ps.shape.rotation;
     }
 
     // Update is called once per frame
@@ -40,6 +46,7 @@ public class playerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        pos = transform.position;
         if (jump)
         {
             rb.velocity = Vector2.up * jumpForce;
@@ -48,6 +55,22 @@ public class playerMove : MonoBehaviour
         }
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         GameManager.Instance.increaseScore(transform.position);
+        if (pos != transform.position)
+        {
+            if(horizontal >= 0)
+            {
+                psRot.y = -99;
+            }
+            else if(horizontal <= 0)
+            {
+                psRot.y = 99;
+            }
+            ps.Play();
+        }
+        else
+        {
+            ps.Pause();
+        }
     }
 
     void OnCollisionEnter2D(Collision2D plat)
