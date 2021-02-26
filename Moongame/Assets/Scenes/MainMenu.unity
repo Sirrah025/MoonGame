@@ -623,8 +623,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 241.39, y: 274.43}
-  m_SizeDelta: {x: 260, y: 50}
+  m_AnchoredPosition: {x: 263.9, y: 262.9}
+  m_SizeDelta: {x: 316, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &582675161
 GameObject:
@@ -1691,7 +1691,14 @@ MonoBehaviour:
     by matwalkden
 
 
+    Flag by Nekith
+
+
     Edge of the Galaxy font by QD fonts
+
+
+    Return
+    to the Black Star song by Deep Space Destructors
 
 '
   m_isRightToLeft: 0
