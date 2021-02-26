@@ -91,8 +91,8 @@ public class GameManager : MonoBehaviour
         if (scoreMem < pos.y)
         {
             scoreMem = pos.y;
+            scoreNum += scoreMem;
         }
-        scoreNum += scoreMem;
         score.text = "Score: " + System.Math.Round((decimal)scoreNum, 3);
     }
 
