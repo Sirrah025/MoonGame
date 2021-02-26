@@ -10,6 +10,8 @@ public class playerMove : MonoBehaviour
     public GameObject jumpPS;
     public GameObject walkPS;
     public GameObject oWalkPS;
+    SpriteRenderer sr;
+    Animator anim;
 
     [Header("Components")]
     private Rigidbody2D rb;
@@ -36,6 +38,9 @@ public class playerMove : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
         psRot = ps.shape.rotation;
         psPos = jumpPS.transform.position;
+        sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -50,7 +55,22 @@ public class playerMove : MonoBehaviour
             jump = true;
             jumpPS.transform.position = transform.position;
             Instantiate(jumpPS);
+            anim.SetBool("jump", true);
         }
+
+        anim.SetBool("jump", false);
+
+        if (horizontal >= 0)
+        {
+            sr.flipX = false;
+            anim.SetFloat("horizontal", horizontal);
+        } else
+        {
+            sr.flipX = true;
+            anim.SetFloat("horizontal", horizontal);
+        }
+
+
     }
 
     private void FixedUpdate()
