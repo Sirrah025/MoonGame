@@ -8,8 +8,6 @@ public class playerMove : MonoBehaviour
     public float speed = 6f;
     private float jumpForce = 7f;
     public GameObject jumpPS;
-    public GameObject walkPS;
-    public GameObject oWalkPS;
     SpriteRenderer sr;
     Animator anim;
 
@@ -46,8 +44,6 @@ public class playerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        walkPS.transform.position = transform.position;
-        oWalkPS.transform.position = transform.position;
         onGround = Physics2D.Raycast(transform.position, Vector2.down, groundDist, groundLayer);
         horizontal = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump") && onGround)
@@ -83,18 +79,6 @@ public class playerMove : MonoBehaviour
         }
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         GameManager.Instance.increaseScore(transform.position);
-        if (onGround && horizontal != 0)
-        {
-            switch(horizontal > 0)
-            {
-                case true:
-                    Instantiate(walkPS);
-                    break;
-                case false:
-                    Instantiate(oWalkPS);
-                    break;
-            }
-        }
     }
 
     void OnCollisionEnter2D(Collision2D plat)
